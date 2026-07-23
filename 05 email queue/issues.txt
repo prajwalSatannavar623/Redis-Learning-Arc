@@ -1,0 +1,10 @@
+Issues of using redis as email queue:
+1. **Data Persistence**: Redis is an in-memory data store, which means that if the server crashes or restarts, all queued emails may be lost unless persistence is configured properly. This can lead to loss of important email data.
+
+2. **Memory Limitations**: Since Redis stores data in memory, it can run into memory limitations if the email queue grows too large. This can lead to performance degradation or even crashes if the memory limit is exceeded.
+
+3. **Lack of Built-in Retry Mechanism**: Redis does not have a built-in retry mechanism for failed email deliveries. If an email fails to send, it will need to be manually re-queued or handled by additional logic in the application.
+
+4. **Job Loss**: If the application crashes or is restarted while processing emails, any jobs that were in progress may be lost. This can lead to incomplete email sending and require additional logic to handle job recovery.
+
+5. **No parallel worers**: Redis does not provide built-in support for parallel workers to process the email queue. This means that if you want to process multiple emails simultaneously, you will need to implement your own worker management system, which can add complexity to your application.
