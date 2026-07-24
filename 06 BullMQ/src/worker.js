@@ -27,4 +27,13 @@ const welcomeEmailWorker = new Worker(
   },
 );
 
+// Event listeners
+welcomeEmailWorker.on("completed", (job) => {
+  console.log(`[COMPLETED]: Job ${job.id} done!`);
+});
+
+welcomeEmailWorker.on("failed", (job, err) => {
+  console.error(`[FAILED]: Job ${job?.id} failed with error: ${err.message}`);
+});
+
 export { welcomeEmailWorker };
